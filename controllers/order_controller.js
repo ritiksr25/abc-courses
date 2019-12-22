@@ -10,8 +10,6 @@ module.exports.orders = async (req, res) => {
     if (!req.user.isAdmin) {
         filter.user = req.user.id;
     }
-    let filter = {},
-        orders;
     if (id) {
         orders = await Order.findById(id);
         return res

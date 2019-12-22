@@ -28,3 +28,26 @@ module.exports.userValidation = (req, res, next) => {
         });
     }
 };
+
+module.exports.productValidation = (req, res, next) => {
+    let { title, description, price } = req.body;
+    if (!title || !description || !price) {
+        return res
+            .status(400)
+            .json({
+                message: "All fields are mandatory",
+                error: true,
+                data: req.body
+            });
+    } else if (Number(price) < 1) {
+        return res
+            .status(400)
+            .json({
+                message: "Price cannot be less than 1",
+                error: true,
+                data: req.body
+            });
+    } else {
+        return next();
+    }
+};

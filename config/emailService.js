@@ -8,10 +8,12 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+
 const { mailTemplates } = require("../config/emailTemplates");
 
-module.exports.sendMail = async (order, mailType, to) => {
+module.exports.sendMail = async (order, mailType) => {
     let from = `ABC COURSES <${process.env.user}>`,
+        to = order.user.email,
         template = mailTemplates(mailType, order),
         subject = template.subject,
         html = template.body,
