@@ -13,11 +13,24 @@ const {
 let { catchErrors } = require("../../../config/errorHandler");
 let { adminAuth } = require("../../../middlewares/auth");
 let { productValidation } = require("../../../middlewares/validations");
+let { upload } = require("../../../config/imgUpload");
 
 // routes
 router.get("/", catchErrors(products));
-router.post("/", adminAuth, productValidation, catchErrors(addProduct));
-router.put("/:id", adminAuth, productValidation, catchErrors(updateProduct));
+router.post(
+    "/",
+    adminAuth,
+    productValidation,
+    upload.single("file"),
+    catchErrors(addProduct)
+);
+router.put(
+    "/:id",
+    adminAuth,
+    productValidation,
+    upload.single("file"),
+    catchErrors(updateProduct)
+);
 router.delete("/:id", adminAuth, catchErrors(deleteProduct));
 
 // export router

@@ -59,8 +59,8 @@ module.exports.order = async (req, res) => {
 };
 
 module.exports.createRzpOrder = async (req, res) => {
-    let orders = await Order.findById(req.params.id);
-    let order = await createOrder(orders.price, req.params.id);
+    let orders = await Order.findById(req.params.id).populate("product");
+    let order = await createOrder(orders.product.price, req.params.id);
     res.status(200).json({
         message: "success",
         order,
@@ -85,11 +85,14 @@ module.exports.paymentSuccess = async (req, res) => {
             1}${curDate.getDate()}${curDate.getHours()}${curDate.getMinutes()}${Math.floor(
             Math.random() * 99
         ) + 10}`;
+        let product = await Product.findById(order.product);
+        product.sales += 1;
         await order.save();
         order = await Order.findById(razorpay_order_id)
             .populate("user")
             .populate("product");
-        await sendMail(order, "order-confirm");
+        let promises = [sendMail(order, "order-confirm"), product.save()];
+        await Promise.all(promises);
         res.status(200).json({ message: "success", error: false, data: order });
     } else {
         res.status(500).json({

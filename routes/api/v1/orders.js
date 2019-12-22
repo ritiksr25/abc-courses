@@ -4,6 +4,7 @@ const router = express.Router();
 // load controller
 const {
     orders,
+    order,
     createRzpOrder,
     paymentSuccess
 } = require("../../../controllers/order_controller");
@@ -16,6 +17,7 @@ let { userAuth, allAuth } = require("../../../middlewares/auth");
 router.get("/", allAuth, catchErrors(orders));
 router.post("/payments/success", catchErrors(paymentSuccess));
 router.post("/payments/:id", userAuth, catchErrors(createRzpOrder));
+router.post("/:id", userAuth, catchErrors(order));
 
 // export router
 module.exports = router;
