@@ -5,21 +5,10 @@ require("dotenv").config();
 
 const UserSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String
-        },
-        role: {
-            type: String,
-            default: "user"
-        }
+        name: { type: String, required: true },
+        email: { type: String, required: true },
+        password: { type: String, required: true },
+        isAdmin: { type: Boolean, default: false }
     },
     { timestamps: true }
 );
@@ -30,7 +19,7 @@ UserSchema.methods.generateAuthToken = function() {
             id: this._id,
             name: this.name,
             email: this.email,
-            role: this.role
+            isAdmin: this.isAdmin
         },
         process.env.JWT_PRIVATE_KEY
     );

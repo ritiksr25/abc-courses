@@ -27,10 +27,14 @@ app.use(
 
 //load Schemas
 const User = require("./models/User");
+const Product = require("./models/Product");
+const Order = require("./models/Order");
 
 //Routes
-app.use("/api/v1", require("./routes/api/v1/index"));
 app.use("/api/v1/users", require("./routes/api/v1/users"));
+app.use("/api/v1/admin", require("./routes/api/v1/admin"));
+app.use("/api/v1/products", require("./routes/api/v1/products"));
+app.use("/api/v1/orders", require("./routes/api/v1/orders"));
 
 app.use("*", notFound);
 

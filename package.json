@@ -1,5 +1,5 @@
 {
-    "name": "node-starter-code",
+    "name": "e-commerce-site",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -9,14 +9,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ritiksr25/node-starter-code.git"
+        "url": "https://github.com/ritiksr25/listtsk.git"
     },
     "author": "Ritik Srivastava",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/ritiksr25/node-starter-code/issues"
+        "url": "https://github.com/ritiksr25/listtsk/issues"
     },
-    "homepage": "https://github.com/ritiksr25/node-starter-code#readme",
+    "homepage": "https://github.com/ritiksr25/listtsk#readme",
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
