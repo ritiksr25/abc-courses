@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+// import Home from "./components/home/home";
+// import Courses from "./components/courses/courses";
+// import Navbar from "./components/navbar/navbar";
+// import Logout from "./components/logout/logout";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    loggedIn: false
+  };
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.setState({ loggedIn: true });
+    }
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {/* <Navbar user={this.state.loggedIn} /> */}
+        <Switch>
+          {/* <Route exact path="/" component={Home} />
+          <Route exact path="/courses" component={Courses} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/logout" component={Logout} /> */}
+          <Redirect exact from="/" to="/" />
+          <Redirect to="/" />
+        </Switch>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;

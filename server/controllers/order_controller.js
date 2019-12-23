@@ -25,7 +25,7 @@ module.exports.orders = async (req, res) => {
             .limit(perPage * pageNo)
             .skip(perPage * pageNo - perPage)
             .populate("user")
-            .populate("product");
+            .populate("course");
         let totalOrdersSearched = await Order.countDocuments(filter);
         let totalPagesRequired = Math.floor(
             Number(totalOrdersSearched / perPage) + 1
@@ -41,14 +41,29 @@ module.exports.orders = async (req, res) => {
 
 module.exports.order = async (req, res) => {
     let { id } = req.params;
-    let product = await Product.findById(id);
-    if (product) {
-        let newOrder = {
-            user: req.user.id,
-            product: product._id
-        };
-        let order = await Order.create(newOrder);
-        res.status(200).json({ message: "success", error: false, data: order });
+    let course = await Course.findById(id);
+    if (course) {
+        let order = await Order.findOne({
+            $and: [{ user: req.user.id }, { course: id }]
+        });
+        if (order) {
+            res.status(400).json({
+                message: "Already Purchased",
+                error: true,
+                data: null
+            });
+        } else {
+            let newOrder = {
+                user: req.user.id,
+                course: course._id
+            };
+            let order = await Order.create(newOrder);
+            res.status(200).json({
+                message: "success",
+                error: false,
+                data: order
+            });
+        }
     } else {
         res.status(400).json({
             message: "Invalid Course",
@@ -59,8 +74,8 @@ module.exports.order = async (req, res) => {
 };
 
 module.exports.createRzpOrder = async (req, res) => {
-    let orders = await Order.findById(req.params.id).populate("product");
-    let order = await createOrder(orders.product.price, req.params.id);
+    let orders = await Order.findById(req.params.id).populate("course");
+    let order = await createOrder(orders.course.price, req.params.id);
     res.status(200).json({
         message: "success",
         order,
@@ -85,13 +100,13 @@ module.exports.paymentSuccess = async (req, res) => {
             1}${curDate.getDate()}${curDate.getHours()}${curDate.getMinutes()}${Math.floor(
             Math.random() * 99
         ) + 10}`;
-        let product = await Product.findById(order.product);
-        product.sales += 1;
+        let course = await Course.findById(order.course);
+        course.sales += 1;
         await order.save();
         order = await Order.findById(razorpay_order_id)
             .populate("user")
-            .populate("product");
-        let promises = [sendMail(order, "order-confirm"), product.save()];
+            .populate("course");
+        let promises = [sendMail(order, "order-confirm"), course.save()];
         await Promise.all(promises);
         res.status(200).json({ message: "success", error: false, data: order });
     } else {

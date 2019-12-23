@@ -10,9 +10,9 @@ const OrderSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
-        product: {
+        course: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Product",
+            ref: "Course",
             required: true
         },
         status: { type: String, enum: ["pending", "paid"], default: "pending" },

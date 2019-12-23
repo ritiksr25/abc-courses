@@ -3,35 +3,35 @@ const router = express.Router();
 
 // load controller
 const {
-    products,
-    addProduct,
-    updateProduct,
-    deleteProduct
-} = require("../../../controllers/products_controller");
+    courses,
+    addCourse,
+    updateCourse,
+    deleteCourse
+} = require("../../../controllers/course_controller");
 
 // middlewares
 let { catchErrors } = require("../../../config/errorHandler");
 let { adminAuth } = require("../../../middlewares/auth");
-let { productValidation } = require("../../../middlewares/validations");
+let { courseValidation } = require("../../../middlewares/validations");
 let { upload } = require("../../../config/imgUpload");
 
 // routes
-router.get("/", catchErrors(products));
+router.get("/", catchErrors(courses));
 router.post(
     "/",
     adminAuth,
-    productValidation,
+    courseValidation,
     upload.single("file"),
-    catchErrors(addProduct)
+    catchErrors(addCourse)
 );
 router.put(
     "/:id",
     adminAuth,
-    productValidation,
+    courseValidation,
     upload.single("file"),
-    catchErrors(updateProduct)
+    catchErrors(updateCourse)
 );
-router.delete("/:id", adminAuth, catchErrors(deleteProduct));
+router.delete("/:id", adminAuth, catchErrors(deleteCourse));
 
 // export router
 module.exports = router;
