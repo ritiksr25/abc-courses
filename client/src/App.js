@@ -6,7 +6,7 @@ import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import Login from "./components/auth/login";
-// import Logout from "./components/logout/logout";
+import Logout from "./components/auth/logout";
 import "./App.css";
 
 class App extends Component {
@@ -29,8 +29,8 @@ class App extends Component {
           {/* <Route exact path="/" component={Home} /> */}
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/login" component={Login} />
-          {/* <Route exact path="/about" component={About} />
-          <Route exact path="/logout" component={Logout} /> */}
+          {/* <Route exact path="/about" component={About} /> */}
+          <Route exact path="/logout" component={Logout} />
           <Redirect exact from="/" to="/" />
           <Redirect to="/" />
         </Switch>
