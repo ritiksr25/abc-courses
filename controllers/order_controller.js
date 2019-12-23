@@ -11,7 +11,9 @@ module.exports.orders = async (req, res) => {
         filter.user = req.user.id;
     }
     if (id) {
-        orders = await Order.findById(id);
+        orders = await Order.findById(id)
+            .populate("user")
+            .populate("course");
         return res
             .status(200)
             .json({ message: "success", error: false, data: orders });
@@ -76,6 +78,8 @@ module.exports.order = async (req, res) => {
 module.exports.createRzpOrder = async (req, res) => {
     let orders = await Order.findById(req.params.id).populate("course");
     let order = await createOrder(orders.course.price, req.params.id);
+    orders.rzpId = order.id;
+    await orders.save();
     res.status(200).json({
         message: "success",
         order,
@@ -91,7 +95,7 @@ module.exports.paymentSuccess = async (req, res) => {
     } = req.body;
 
     if (razorpay_payment_id) {
-        let order = await Order.findById(razorpay_order_id);
+        let order = await Order.findOne({ rzpId: razorpay_order_id });
         order.status = "paid";
         order.transacId = razorpay_payment_id;
         let curDate = new Date(Date.now());
@@ -103,7 +107,7 @@ module.exports.paymentSuccess = async (req, res) => {
         let course = await Course.findById(order.course);
         course.sales += 1;
         await order.save();
-        order = await Order.findById(razorpay_order_id)
+        order = await Order.findOne({ rzpId: razorpay_order_id })
             .populate("user")
             .populate("course");
         let promises = [sendMail(order, "order-confirm"), course.save()];

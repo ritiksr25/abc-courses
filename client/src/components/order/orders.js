@@ -48,7 +48,7 @@ class Orders extends Component {
                             <td>{item.course.title}</td>
                             <td>{item.status}</td>
                             <td>{item.createdAt.slice(0,10)}</td>
-                            <td><Link to={`/orders/${item._id}`}>Go</Link></td>
+                            <td><Link to={`/orders/${item._id}`}>View</Link></td>
                           </tr>
                          ))
                          : null}

@@ -17,7 +17,8 @@ const OrderSchema = new mongoose.Schema(
         },
         status: { type: String, enum: ["pending", "paid"], default: "pending" },
         invoiceId: { type: String },
-        transacId: { type: String }
+        transacId: { type: String },
+        rzpId: { type: String }
     },
     { timestamps: true }
 );

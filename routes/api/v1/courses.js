@@ -4,6 +4,7 @@ const router = express.Router();
 // load controller
 const {
     courses,
+    course,
     addCourse,
     updateCourse,
     deleteCourse
@@ -11,7 +12,7 @@ const {
 
 // middlewares
 let { catchErrors } = require("../../../config/errorHandler");
-let { adminAuth } = require("../../../middlewares/auth");
+let { adminAuth, allAuth } = require("../../../middlewares/auth");
 let { courseValidation } = require("../../../middlewares/validations");
 let { upload } = require("../../../config/imgUpload");
 
@@ -32,6 +33,7 @@ router.put(
     catchErrors(updateCourse)
 );
 router.delete("/:id", adminAuth, catchErrors(deleteCourse));
+router.get("/:id", allAuth, catchErrors(course));
 
 // export router
 module.exports = router;

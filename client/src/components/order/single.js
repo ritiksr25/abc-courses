@@ -65,16 +65,16 @@ const data = this.state.data.data;
                                 </div>
                                 <div className="card">
                                 <p className="card-block">
-                        <strong className=" description">Purchased On: </strong>${data.createdAt.slice(0,10)};
+                        <strong className=" description">Purchased On: </strong>{data.createdAt.slice(0,10)}
                       </p>
                       <p class="card-block">
-                        <strong class=" description">Payment Status: </strong>{data.status};
+                        <strong className=" description">Payment Status: </strong>{data.status}
                       </p>
                       <p class="card-block">
-                        <strong class=" description">Transaction ID: </strong>{data.transacId};
+                        <strong className=" description">Transaction ID: </strong>{data.transacId}
                       </p>
                       <p class="card-block">
-                        <strong class=" description">Invoice ID: </strong>{data.invoiceId};
+                        <strong className=" description">Invoice ID: </strong>{data.invoiceId}
                       </p>
                                 </div>
                             </div>

@@ -7,12 +7,7 @@ escapeRegex = text => {
 module.exports.courses = async (req, res) => {
     let { search, category, perPage, pageNo, sortBy, sortType, id } = req.query;
     let courses;
-    if (id) {
-        courses = await Course.findById(id);
-        return res
-            .status(200)
-            .json({ message: "success", error: false, data: courses });
-    } else {
+    
         perPage = perPage || 10;
         pageNo = pageNo || 1;
         sortBy = sortBy || "createdAt";
@@ -41,8 +36,26 @@ module.exports.courses = async (req, res) => {
             totalcoursesSearched
         };
         res.status(200).json({ message: "success", error: false, data });
-    }
 };
+
+module.exports.course = async (req, res) => {
+    let { id } = req.params;
+    let courses = await Course.findById(id);
+        let isBuyable = false;
+        if (req.user) {
+            let ordered = await Order.findOne({
+                $and: [{ course: id }, { user: req.user.id }]
+            });
+            if (!ordered) {
+                isBuyable = true;
+            }
+        }
+        let data = {
+            courses,
+            isBuyable
+        };
+        return res.status(200).json({ message: "success", error: false, data });
+}
 
 module.exports.addCourse = async (req, res) => {
     let { title, description, price, category } = req.body;
@@ -93,7 +106,7 @@ module.exports.updateCourse = async (req, res) => {
         course.description = description;
         course.price = price;
         course.category = category;
-        course = await Course.save();
+        course = await course.save();
         res.status(200).json({
             message: "success",
             error: false,

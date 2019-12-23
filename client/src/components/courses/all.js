@@ -39,7 +39,7 @@ class AllCourses extends Component {
                     <div className="row">
                         {data
                             ? data.courses.map((item, i) => (
-                                  <div className="col-lg-3 col-sm-6 col-12" key={i}>
+                                  <div className="col-lg-4 mt-4" key={i}>
                                       <Link
                                           className="card"
                                           to={ "/courses/" + item._id }

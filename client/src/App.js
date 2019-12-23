@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/general/index";
 import About from "./components/general/about";
 import Courses from "./components/courses/all";
-// import Course from "./components/courses/view";
+import Course from "./components/courses/view";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
@@ -34,7 +34,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
-          {/* <Route exact path="/courses/:id" component={Course} /> */}
+          <Route exact path="/courses/:id" component={Course} />
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/orders/:id" component={Order} />
           <Route exact path="/register" component={Register} />
