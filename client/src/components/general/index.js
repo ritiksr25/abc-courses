@@ -4,14 +4,14 @@ import banner from "./banner.jpg"
 import axios from "axios";
 import * as ROUTES from "../../utils/routes";
 
-class AllCourses extends Component {
+class Home extends Component {
     state = {
         data: ""
     };
 
     async componentDidMount() {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(ROUTES.courses, {
+        const { data } = await axios.get(`${ROUTES.courses}?sortBy=sales&sortType=desc`, {
             headers: {
                 "x-auth-token": token
             }
@@ -25,8 +25,8 @@ class AllCourses extends Component {
                 <div className="container pt-4 pb-4">
                     <div className="row">
                         <div className="col-sm-8 offset-sm-2 text-center">
-                            <h2>All Courses</h2>
-                            {/* <Link className="btn btn-outline-dark sec_btn ml-0 mb-2" to="/courses">All Courses</Link> */}
+                            <h2>Popular Courses</h2>
+                            <Link className="btn btn-outline-dark sec_btn ml-0 mb-2" to="/courses">All Courses</Link>
                         </div>
                     </div>
                 </div>
@@ -78,4 +78,4 @@ class AllCourses extends Component {
     }
 }
 
-export default AllCourses;
+export default Home;

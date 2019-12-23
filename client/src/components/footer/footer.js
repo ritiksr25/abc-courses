@@ -54,11 +54,7 @@ const Footer = () => {
                         color: "#fff",
                         fontSize: "14px",
                         padding: "8px",
-                        background: "#EB5757",
-                        background:
-                            "-webkit-linear-gradient(to right, #000000, #EB5757)",
-                        background:
-                            "linear-gradient(to right, #000000, #EB5757)"
+                        background: "#250505"
                     }}
                 >
                     <p

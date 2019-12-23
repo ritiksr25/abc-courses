@@ -1,6 +1,6 @@
 body {
     overflow-x: hidden;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat";
 }
 
 .title {
@@ -21,11 +21,6 @@ body {
 a {
     transition: 0.3s all ease;
     color: #000000;
-}
-
-a:hover {
-    color: #000000;
-    text-decoration: none;
 }
 
 .sec_btn:hover,
@@ -61,16 +56,6 @@ a:hover {
     
 }
 
-.blogz {
-    text-align: right;
-    width: 100%;
-    max-height: 50px;
-}
-
-.like:hover {
-    color: white;
-}
-
 .custom_btn {
     color: #fff;
     border-color: #fff;
@@ -78,24 +63,11 @@ a:hover {
     font-weight: 600;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 2px 4px rgba(0, 0, 0, 0.23);
     padding: 8px 16px;
-    background: #eb5757;
-    background: -webkit-linear-gradient(to right, #000000, #eb5757);
-    background: linear-gradient(to right, #000000, #eb5757);
+    background: #f70000;
+    background: -webkit-linear-gradient(to right, #000000, #fc0000);
+    background: linear-gradient(to right, #000000, #fa0000);
 }
 
-.btn-more {
-    color: #161515;
-    font-size: 14px !important;
-    padding: 8px;
-    width: 84px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: -8px;
-}
-
-.card .btn-more:hover {
-    background: aliceblue;
-}
 
 .platform {
     top: 25px;
@@ -112,25 +84,10 @@ a:hover {
     padding: 2px 12px;
 }
 
-.edit:hover {
-    background: #4285f4;
-    border: 0;
-}
-
-.del:hover {
-    background: red;
-    border: 0;
-}
-
-.cmnt:hover {
-    background: #ffe72e;
-    border: 0;
-}
-
 li {
     list-style: none;
-    font-size: 12px;
-    color: #444444;
+    font-size: 15px;
+    color: #000000;
 }
 
 .custom_nav li a,
@@ -158,95 +115,4 @@ li {
     .main__title {
         font-size: 24px;
     }
-}
-
-.search-input {
-    padding: 4px;
-}
-
-.contest_title {
-    min-height: 100px;
-}
-
-.space {
-    margin: 10px;
-}
-
-.fa-calendar {
-    color: #42f5b9;
-    font-size: 20px;
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
-.fa-clock {
-    color: #faa419;
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.fa-tag {
-    color: #ffbfea;
-    font-size: 20px;
-    margin-top: 15px;
-}
-
-.fa-users {
-    color: #f82d2d;
-    font-size: 20px;
-    margin-top: 15px;
-}
-
-.fa-star {
-    color: #ffde4c;
-    font-size: 25px;
-    margin-top: 15px;
-}
-
-.fa-imdb {
-    color: #0c202e;
-    font-size: 20px;
-    margin-top: 15px;
-}
-
-.fa-language {
-    color: #3e0afa;
-    font-size: 20px;
-    margin-top: 3px;
-}
-
-.fa-globe {
-    color: #08f888;
-    font-size: 20px;
-    margin-top: 3px;
-}
-
-.fa-github {
-    color: #0a0a0a;
-    font-size: 25px;
-    margin-top: 3px;
-}
-
-.fa-linkedin {
-    color: #0870f8;
-    font-size: 25px;
-    margin-top: 3px;
-}
-
-.fa-instagram {
-    color: #f8088c;
-    font-size: 25px;
-    margin-top: 3px;
-}
-
-.fa-envelope {
-    color: #f80808;
-    font-size: 25px;
-    margin-top: 3px;
-}
-
-.list-group-item {
-    font-size: 17px;
-    margin-top: 3px;
-    text-align: center;
 }

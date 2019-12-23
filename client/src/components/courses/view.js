@@ -7,10 +7,13 @@ import * as ROUTES from "../../utils/routes";
 
 
 class Course extends Component {
-    state = {
-        data: "",
-        token: ""
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: "",
+          token: ""
+        };
+      }
 
     async componentDidMount() {
         let token = localStorage.getItem("token");
@@ -100,6 +103,7 @@ class Course extends Component {
                                         }
                                         height="200px"
                                         width="200px"
+                                        alt="img"
                                     />
                                     <h4 className="card-title mt-2">
                                         {data.title}

@@ -1,4 +1,4 @@
-const apiUrl = "https://abccourses.herokuapp.com/api/v1";
+const apiUrl = "http://localhost:5000/api/v1";
 
 export const register = `${apiUrl}/users/register`;
 export const login = `${apiUrl}/users/login`;

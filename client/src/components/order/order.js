@@ -11,7 +11,7 @@ class Course extends Component {
 
     async componentDidMount() {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(`${ROUTES.courses}?id=${this.props.match.params.id}`, {
+        const { data } = await axios.post(`${ROUTES.payorder}/${this.props.match.params.id}`, {
             headers: {
                 "x-auth-token": token
             }

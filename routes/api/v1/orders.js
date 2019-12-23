@@ -17,7 +17,7 @@ let { userAuth, allAuth } = require("../../../middlewares/auth");
 router.get("/", allAuth, catchErrors(orders));
 router.post("/payments/success", catchErrors(paymentSuccess));
 router.post("/payments/:id", userAuth, catchErrors(createRzpOrder));
-router.post("/:id", catchErrors(order));
+router.post("/:id", userAuth, catchErrors(order));
 
 // export router
 module.exports = router;
