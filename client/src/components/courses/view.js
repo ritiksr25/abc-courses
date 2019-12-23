@@ -92,7 +92,6 @@ class Course extends Component {
 					color: "#9D50BB"
                 }
 			};
-			console.log(options);
 			const rzp1 = new window.Razorpay(options);
 			rzp1.open();
 		} catch (error) {
