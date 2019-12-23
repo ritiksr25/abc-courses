@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // import Home from "./components/home/home";
 import Courses from "./components/courses/all";
+import Course from "./components/courses/view";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
+import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 import Logout from "./components/auth/logout";
 import "./App.css";
@@ -28,6 +30,9 @@ class App extends Component {
         <Switch>
           {/* <Route exact path="/" component={Home} /> */}
           <Route exact path="/courses" component={Courses} />
+          <Route exact path="/courses/:id" component={Course} />
+          {/* <Route exact path="/order/:id" component={order} /> */}
+          <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           {/* <Route exact path="/about" component={About} /> */}
           <Route exact path="/logout" component={Logout} />

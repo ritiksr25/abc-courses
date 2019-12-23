@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import * as ROUTES from "../../utils/routes";
 
-let message;
-
 class Login extends Component {
     constructor(props) {
       super(props);
@@ -39,11 +37,11 @@ class Login extends Component {
       } catch (err) {
         if (err.response === undefined){
              console.log(err.message);
-             message = err.message;
+            //  message = err.message;
         }
         else {
             console.log(err.response);
-            message = err.response;
+            // message = err.response;
       }
     }
 };
@@ -51,30 +49,35 @@ class Login extends Component {
     render() {
         return (
         <div className="container pt-4 pb-4">
-            <div className="col-lg-6 col-sm-6 col-12 mx-auto">
+            <div className="col-md-8 mx-auto">
                 <div className="card">
                 <h2 className="text-center">LogIn</h2>
                 <form className="text-center" onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                    <label>Email address</label>
                         <input
+                            type="email"
+                            name="email"
                             className="form-control"
-                            placeholder="abc@xyz.com"
+                            placeholder="Enter Email"
+                            value={this.state.email}
+                            onChange={this.onChange}
                         />
                     </div>
                     <div className="form-group">
-                        <label>Password</label>
                         <input
                             type="password"
                             className="form-control"
                             placeholder="••••••••••••••"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onChange}
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>{message}</label>
-                    </div>
+                    </div> */}
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary "
                         type="submit"
                     > Login </button>
                         </form>

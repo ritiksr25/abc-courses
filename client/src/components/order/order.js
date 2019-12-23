@@ -1,84 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Redirect } from 'react-router'
 import banner from "./banner.jpg";
 import axios from "axios";
 import * as ROUTES from "../../utils/routes";
 
-
 class Course extends Component {
     state = {
-        data: "",
-        token: ""
+        data: ""
     };
 
     async componentDidMount() {
-        let token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
         const { data } = await axios.get(`${ROUTES.courses}?id=${this.props.match.params.id}`, {
             headers: {
                 "x-auth-token": token
             }
         });
-        this.setState({ data: data, token: token });
+        this.setState({ data: data });
     }
-
-    handlePayment = async(item) => {
-        let token = this.state.token;
-        const { data } = await axios.post(`${ROUTES.order}/${item._id}`, {
-            headers: {
-                "x-auth-token": token
-            }
-        });
-        const { order, key } = await axios.post(`${ROUTES.payorder}/${order._id}`, {
-            headers: {
-                "x-auth-token": token
-            }
-        });
-        
-        const options = {
-            key: key,
-            name: "Payments",
-            amount: order.amount,
-            order_id: order.id,
-            notes: order.notes,
-      
-            handler: async response => {
-              try {
-                const resp = await axios.post(
-                  ROUTES.paysuccess,
-                  {
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_signature: response.razorpay_signature,
-                  },
-                  {
-                    headers: {
-                      "x-auth-token": token
-                    }
-                  }
-                );
-      
-                if (resp.data.message === "success") {
-                  alert("Payment successfully completed. Redirecting to order page");
-                  return <Redirect to={"/orders" + resp.data.data._id}/>;
-                }
-              } catch (err) {
-                if (err.response === undefined) {
-                  console.log(err.message);
-                } else {
-                  console.log(err.response);
-                }
-              }
-            },
-            theme: {
-              color: "#9D50BB"
-            }
-          };
-          const rzp1 = new window.Razorpay(options);
-          rzp1.open();
-        };
-
-
     render() {
         const data = this.state.data.data;
         return (
@@ -137,12 +76,12 @@ class Course extends Component {
                                     </p>
                                 </div>
                                 <div className="card">
-                                    <button
+                                    <Link
+                                        to={`/order/${data._id}`}
                                         className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
-                                        onClick={() => this.handlePayment(data)}
                                     >
                                         Buy Now
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         ) : null}
