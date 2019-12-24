@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router'
 import banner from "./banner.jpg";
 import axios from "axios";
 import * as ROUTES from "../../utils/routes";
@@ -146,39 +147,51 @@ class Order extends Component {
                                 </div>
                                 <div className="card">
                                     <p className="card-block">
-                                        <strong className=" description">
-                                            Purchased On:{" "}
+                                        <strong className="description">
+                                            Purchased On: {" "}
                                         </strong>
                                         {data.createdAt.slice(0, 10)}
                                     </p>
                                     <p class="card-block">
-                                        <strong className=" description">
-                                            Payment Status:{" "}
+                                        <strong className="description">
+                                            Payment Status: {" "}
                                         </strong>
                                         {data.status}
                                     </p>
                                     <p class="card-block">
-                                        <strong className=" description">
-                                            Transaction ID:{" "}
+                                        <strong className="description">
+                                            Transaction ID: {" "}
                                         </strong>
                                         {data.transacId}
                                     </p>
                                     <p class="card-block">
-                                        <strong className=" description">
-                                            Invoice ID:{" "}
+                                        <strong className="description">
+                                            Invoice ID: {" "}
                                         </strong>
                                         {data.invoiceId}
                                     </p>
+                                    {data.status === "pending" ? (
+                                        <button
+                                                className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
+                                                onClick={e => this.handlePayment(e, data)}
+                                            >
+                                                Make Payment
+                                            </button>
+                                    ) : null}
                                 </div>
                             </div>
-                        ) : null}
-                        {data.status === "pending" ? (
-                            <button
-                                className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
-                                onClick={e => this.handlePayment(e, data)}
-                            >
-                                Make Payment
-                            </button>
+                        
+                        
+                        // {/* {(data.status === "pending") ? (
+                        //     <div className="card">
+                        //     <button
+                        //         className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
+                        //         onClick={e => this.handlePayment(e, data)}
+                        //     >
+                        //         Make Payment
+                        //     </button>
+                        //     </div>
+                        // ) : null} */}
                         ) : null}
                     </div>
                 </div>
