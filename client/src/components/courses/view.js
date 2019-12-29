@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Redirect } from 'react-router'
 import banner from "./banner.jpg";
 import axios from "axios";
