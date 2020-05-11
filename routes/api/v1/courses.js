@@ -33,7 +33,7 @@ router.put(
     catchErrors(updateCourse)
 );
 router.delete("/:id", adminAuth, catchErrors(deleteCourse));
-router.get("/:id", allAuth, catchErrors(course));
+router.get("/:id", catchErrors(course));
 
 // export router
 module.exports = router;

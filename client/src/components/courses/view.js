@@ -158,21 +158,23 @@ class Course extends Component {
                                     </p>
                                 </div>
                                 
-                                <div className="card">
-                                    {data.isBuyable == true ?
-                                    <button
-										className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
-                                        onClick={e => this.handlePayment(e, data.courses)}
-									>
-										Buy Now
-									</button>
-                                    : <button
-                                    className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
-                                >
-                                    Already Purchased
-                                </button>}
-    
-                                </div>
+                                {this.state.token ? (
+									<div className="card">
+                                    	{data.isBuyable == true ?
+                                    		<button
+												className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
+                                        		onClick={e => this.handlePayment(e, data.courses)}
+											>
+												Buy Now
+											</button>
+                                    	: 
+											<button
+                                    			className="btn btn-outline-dark sec_btn custom_btn ml-0 mb-2"
+                                			>
+                                    			Already Purchased
+                                			</button>}
+                                	</div>
+								) : null}
                             </div>
                         ) : null}
                     </div>

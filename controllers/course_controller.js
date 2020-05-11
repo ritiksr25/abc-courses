@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 let { upload, deleteImg } = require("../config/imgUpload");
 
 escapeRegex = text => {
@@ -42,9 +43,22 @@ module.exports.course = async (req, res) => {
     let { id } = req.params;
     let courses = await Course.findById(id);
         let isBuyable = false;
-        if (req.user) {
+        const token = req.header("x-auth-token");
+        let user;
+        if (token){
+            let decodedPayload;
+            try{
+                let dpl = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+                decodedPayload = dpl;
+            } catch (err) {
+                console.log(err);
+            }
+            user = decodedPayload;
+        }
+    
+        if (user) {
             let ordered = await Order.findOne({
-                $and: [{ course: id }, { user: req.user.id }]
+                $and: [{ course: id }, { user: user.id }]
             });
             if (!ordered) {
                 isBuyable = true;
